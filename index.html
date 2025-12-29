@@ -1,36 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>魔法禁书目录</title>
-  <link rel="stylesheet" href="./style.css?v=12345">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>魔法禁书目录 - 25禁术</title>
+    <link rel="stylesheet" href="./style.css?v=999">
+    <style>
+        /* 预加载背景色，防止加载图片前的白屏闪烁 */
+        body { background-color: #0f051d; }
+    </style>
 </head>
 <body>
-
-  <!-- 背景法阵 -->
-  <canvas id="bg"></canvas>
-
-  <!-- 世界核心：禁书 -->
-  <header class="core">
-    <div class="book-wrapper">
-      <img src="logo.png" class="book" alt="魔法禁书" />
-      <div class="aura"></div>
+    <div class="stars"></div>
+    <div class="container">
+        <h1>魔法禁书目录</h1>
+        <div id="tools-grid" class="grid">
+            </div>
     </div>
-
-    <h1>魔法禁书目录</h1>
-    <p class="subtitle">
-      The Forbidden Index of AI<br>
-      <span>封印状态：已解除</span>
-    </p>
-  </header>
-
-  <!-- 禁术区域 -->
-  <main class="grimoire">
-    <section class="section-title">⚠ S 级禁术 · 高危</section>
-    <div class="cards" id="cards"></div>
-  </main>
-
-  <script src="main.js?v=final"></script>
+    <script src="./main.js?v=999"></script>
 </body>
 </html>
