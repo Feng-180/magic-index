@@ -1,22 +1,15 @@
 body {
-  background:#0d0d0d;
+  background:#0a0a0a url('https://i.imgur.com/3k8X6yL.png') center top no-repeat;
+  background-size:cover;
   color:#f5f5f5;
-  font-family:sans-serif;
+  font-family:'Comic Sans MS', cursive, sans-serif;
   margin:0;
   padding:0;
 }
 
-.container {
-  width:90%;
-  max-width:800px;
-  margin:20px auto;
-  text-align:center;
-}
+.container {text-align:center; width:90%; max-width:800px; margin:20px auto;}
 
-h1 {
-  color:#ffcc00;
-  margin-bottom:10px;
-}
+h1 { color:#ffcc00; margin-bottom:10px; }
 
 .cards {
   display:flex;
@@ -27,18 +20,19 @@ h1 {
 }
 
 .card {
-  background:#1a1a1a;
+  background:rgba(26,26,26,0.9);
   padding:15px;
   border-radius:10px;
   width:45%;
   text-align:center;
   transition:0.3s;
-  box-shadow:0 0 10px rgba(255,204,0,0.2);
+  box-shadow:0 0 15px rgba(255,204,0,0.3);
+  border:1px dashed #ff6600;
 }
 
 .card:hover {
   transform:scale(1.05);
-  background:#333;
+  box-shadow:0 0 25px #ff9900, 0 0 50px #ff3300;
 }
 
 .card a {
@@ -52,6 +46,22 @@ h1 {
   transition:0.2s;
 }
 
-.card a:hover {
-  background:#ff9900;
+.card a:hover { background:#ff9900; }
+
+.danger-S {color:#ff3300; font-weight:bold;}
+.danger-A {color:#ff6600; font-weight:bold;}
+.danger-B {color:#ffcc00; font-weight:bold;}
+.danger-C {color:#00ccff; font-weight:bold;}
+.danger-D {color:#66ff66; font-weight:bold;}
+
+.logo {
+  display:block;
+  margin:0 auto 10px auto;
+  filter: drop-shadow(0 0 15px #ff66cc) drop-shadow(0 0 20px #ffcc00);
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
