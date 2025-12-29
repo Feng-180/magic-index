@@ -1,38 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('tools-grid');
-    
-    // 直接内置数据，严谨对齐你的 title 字段，彻底消灭 undefined
-    const magicTools = [
-        {"title":"文字 → 图片 · 纯浏览器","url":"https://deepai.org/machine-learning-model/text2img"},
-        {"title":"AI 作画 Playground","url":"https://playgroundai.com/"},
-        {"title":"免登录 Stable Diffusion","url":"https://lexica.art/"},
-        {"title":"AI 头像生成器","url":"https://www.profilepicture.ai/"},
-        {"title":"AI 表情包生成","url":"https://imgflip.com/ai-meme"},
-        {"title":"AI 写作 · 即开即写","url":"https://writesonic.com/chat"},
-        {"title":"AI 故事生成器","url":"https://www.plot-generator.org.uk/"},
-        {"title":"AI 音乐生成","url":"https://soundraw.io/"},
-        {"title":"AI 说话头像","url":"https://www.d-id.com/creative-reality-studio/"},
-        {"title":"AI 视频生成","url":"https://www.synthesia.io/"},
-        {"title":"AI 去背景","url":"https://www.remove.bg/"},
-        {"title":"AI 老照片修复","url":"https://hotpot.ai/restore-picture"},
-        {"title":"AI 图像放大","url":"https://bigjpg.com/"},
-        {"title":"AI 画质增强","url":"https://www.upscale.media/"},
-        {"title":"AI 写代码","url":"https://www.blackbox.ai/"},
-        {"title":"AI 总结网页","url":"https://www.summarize.tech/"},
-        {"title":"AI 论文生成","url":"https://scispace.com/"},
-        {"title":"AI 简历生成","url":"https://www.kickresume.com/en/"},
-        {"title":"AI 海报生成","url":"https://www.canva.com/ai-image-generator/"},
-        {"title":"AI Logo 生成","url":"https://looka.com/"},
-        {"title":"AI 配色神器","url":"https://coolors.co/"},
-        {"title":"AI 字体生成","url":"https://www.fontjoy.com/"},
-        {"title":"AI UI 设计","url":"https://uizard.io/"},
-        {"title":"AI 创意实验室","url":"https://experiments.withgoogle.com/collection/ai"}
-    ];
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔法禁书目录</title>
+    <style>
+        :root { --magic-purple: #9d4edd; --dark-bg: #0f051d; }
+        body { 
+            margin: 0; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            background: radial-gradient(circle at center, #1a0b2e 0%, var(--dark-bg) 100%); 
+            color: white; 
+            min-height: 100vh; 
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        h1 { 
+            text-align: center; color: var(--magic-purple); 
+            text-shadow: 0 0 15px rgba(157, 78, 221, 0.6); 
+            font-size: 2rem; margin: 20px 0 40px; 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+            gap: 15px; 
+        }
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(157, 78, 221, 0.3); 
+            border-radius: 12px; padding: 15px; 
+            text-align: center; transition: all 0.3s; 
+            text-decoration: none; color: white; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
+        .card:active { transform: scale(0.95); background: rgba(157, 78, 221, 0.2); }
+        .icon { font-size: 32px; margin-bottom: 8px; }
+        .name { font-size: 0.9rem; line-height: 1.2; font-weight: 500; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>魔法禁书目录</h1>
+        <div id="tools-grid" class="grid"></div>
+    </div>
 
-    grid.innerHTML = magicTools.map(tool => `
-        <a href="${tool.url}" class="card" target="_blank">
-            <div class="icon">🔮</div>
-            <div class="name">${tool.title}</div>
-        </a>
-    `).join('');
-});
+    <script>
+        const magicTools = [
+            {"title":"文字 → 图片 · 纯浏览器","url":"https://deepai.org/machine-learning-model/text2img"},
+            {"title":"AI 作画 Playground","url":"https://playgroundai.com/"},
+            {"title":"免登录 Stable Diffusion","url":"https://lexica.art/"},
+            {"title":"AI 头像生成器","url":"https://www.profilepicture.ai/"},
+            {"title":"AI 表情包生成","url":"https://imgflip.com/ai-meme"},
+            {"title":"AI 写作 · 即开即写","url":"https://writesonic.com/chat"},
+            {"title":"AI 故事生成器","url":"https://www.plot-generator.org.uk/"},
+            {"title":"AI 音乐生成","url":"https://soundraw.io/"},
+            {"title":"AI 说话头像","url":"https://www.d-id.com/creative-reality-studio/"},
+            {"title":"AI 视频生成","url":"https://www.synthesia.io/"},
+            {"title":"AI 去背景","url":"https://www.remove.bg/"},
+            {"title":"AI 老照片修复","url":"https://hotpot.ai/restore-picture"},
+            {"title":"AI 图像放大","url":"https://bigjpg.com/"},
+            {"title":"AI 画质增强","url":"https://www.upscale.media/"},
+            {"title":"AI 写代码","url":"https://www.blackbox.ai/"},
+            {"title":"AI 总结网页","url":"https://www.summarize.tech/"},
+            {"title":"AI 论文生成","url":"https://scispace.com/"},
+            {"title":"AI 简历生成","url":"https://www.kickresume.com/en/"},
+            {"title":"AI 海报生成","url":"https://www.canva.com/ai-image-generator/"},
+            {"title":"AI Logo 生成","url":"https://looka.com/"},
+            {"title":"AI 配色神器","url":"https://coolors.co/"},
+            {"title":"AI 字体生成","url":"https://www.fontjoy.com/"},
+            {"title":"AI UI 设计","url":"https://uizard.io/"},
+            {"title":"AI 创意实验室","url":"https://experiments.withgoogle.com/collection/ai"}
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('tools-grid');
+            grid.innerHTML = magicTools.map(tool => `
+                <a href="${tool.url}" class="card" target="_blank">
+                    <div class="icon">🔮</div>
+                    <div class="name">${tool.title}</div>
+                </a>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
