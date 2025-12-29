@@ -1,26 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('tools-grid');
 
-    // 加上 ./ 确保路径正确
-    fetch('./tools.json')
-        .then(response => response.json())
+    // 加上随机数 ?t=，强行杀掉缓存
+    fetch('./tools.json?t=' + new Date().getTime())
+        .then(res => res.json())
         .then(data => {
             grid.innerHTML = data.map(tool => {
-                // 自动识别字段，防止出现 undefined
-                const name = tool.name || tool.title || "未知禁术";
-                const icon = tool.icon || "🔮";
-                const url = tool.url || "#";
-                
+                // 容错处理：不管是 name 还是 title，只要有字就显示出来
+                const displayName = tool.name || tool.title || tool.label || "未命名的禁术";
                 return `
-                    <a href="${url}" class="card" target="_blank">
-                        <div class="icon">${icon}</div>
-                        <div class="name">${name}</div>
+                    <a href="${tool.url || '#'}" class="card" target="_blank">
+                        <div class="icon">${tool.icon || '🔮'}</div>
+                        <div class="name">${displayName}</div>
                     </a>
                 `;
             }).join('');
         })
         .catch(err => {
-            console.error('加载失败:', err);
-            grid.innerHTML = '<p>禁术目录加载失败</p>';
+            grid.innerHTML = '<p>读取失败，请检查 tools.json 格式</p>';
         });
 });
