@@ -1,14 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('tools-grid');
-    // 使用相对路径读取 json
+
+    // 加上 ./ 确保路径正确
     fetch('./tools.json')
-        .then(res => res.json())
+        .then(response => response.json())
         .then(data => {
-            grid.innerHTML = data.map(item => `
-                <a href="${item.url}" class="card" target="_blank">
-                    <div class="icon">${item.icon}</div>
-                    <div class="name">${item.name}</div>
-                </a>
-            `).join('');
+            grid.innerHTML = data.map(tool => {
+                // 自动识别字段，防止出现 undefined
+                const name = tool.name || tool.title || "未知禁术";
+                const icon = tool.icon || "🔮";
+                const url = tool.url || "#";
+                
+                return `
+                    <a href="${url}" class="card" target="_blank">
+                        <div class="icon">${icon}</div>
+                        <div class="name">${name}</div>
+                    </a>
+                `;
+            }).join('');
+        })
+        .catch(err => {
+            console.error('加载失败:', err);
+            grid.innerHTML = '<p>禁术目录加载失败</p>';
         });
 });
