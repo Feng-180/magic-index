@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>魔法禁书目录</title>
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
+  <!-- 背景粒子层 -->
+  <canvas id="bgCanvas"></canvas>
 
-  <!-- 魔法书 Logo -->
-  <svg class="logo" width="120" height="120" viewBox="0 0 100 100">
-    <rect x="15" y="20" width="70" height="60" rx="12" ry="12" fill="#ff66cc" stroke="#ffcc00" stroke-width="3"/>
-    <circle cx="50" cy="50" r="10" fill="#fff" stroke="#ffcc00" stroke-width="2"/>
-    <line x1="50" y1="40" x2="50" y2="60" stroke="#ffcc00" stroke-width="2"/>
-    <line x1="40" y1="50" x2="60" y2="50" stroke="#ffcc00" stroke-width="2"/>
-    <circle cx="50" cy="50" r="25" fill="none" stroke="#ff99ff" stroke-width="2" stroke-dasharray="4 3"/>
-  </svg>
+  <!-- 页面内容 -->
+  <div class="container">
+    <!-- Logo -->
+    <img src="logo.png" alt="魔法禁书目录" class="logo">
 
-  <h1>魔法禁书目录</h1>
+    <!-- 页面标题 -->
+    <h1>魔法禁书目录</h1>
 
-  <div class="intro">
-    <p>⚠️ 禁书目录已封印 · 内含黑科技 AI 工具 · 未成年人慎入 ⚠️</p>
-    <p>魔法书记录了 24 种 S 级至 D 级 AI 技术，每一次点击，都是一次力量的解封。</p>
-    <p>每次刷新，S 级禁书会随机高亮，谨慎选择，否则后果自负……</p>
+    <!-- 封印文案 -->
+    <div class="intro">欢迎来到二次元黑科技AI工具集，探索最炫酷的魔法科技！</div>
+
+    <!-- AI工具卡片 -->
+    <div class="cards" id="cardsContainer">
+      <!-- JS 动态生成卡片 -->
+    </div>
   </div>
 
-  <div class="cards" id="cards"></div>
-</div>
 <script src="main.js"></script>
 </body>
 </html>
