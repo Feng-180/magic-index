@@ -67,7 +67,7 @@ function draw(){
   particles.forEach(p=>{
     ctx.beginPath();
     ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,255,255,0.6)';
+    ctx.fillStyle='rgba(255,102,255,0.6)';
     ctx.fill();
     p.x += p.dx;
     p.y += p.dy;
