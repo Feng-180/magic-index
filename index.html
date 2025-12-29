@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>魔法禁书目录</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>魔法禁书目录</title>
+  <link rel="stylesheet" href="style.css?v=final">
 </head>
 <body>
-  <!-- 背景粒子层 -->
-  <canvas id="bgCanvas"></canvas>
 
-  <!-- 页面内容 -->
-  <div class="container">
-    <!-- Logo -->
-    <img src="logo.png" alt="魔法禁书目录" class="logo">
+  <!-- 背景法阵 -->
+  <canvas id="bg"></canvas>
 
-    <!-- 页面标题 -->
-    <h1>魔法禁书目录</h1>
-
-    <!-- 封印文案 -->
-    <div class="intro">欢迎来到二次元黑科技AI工具集，探索最炫酷的魔法科技！</div>
-
-    <!-- AI工具卡片 -->
-    <div class="cards" id="cardsContainer">
-      <!-- JS 动态生成卡片 -->
+  <!-- 世界核心：禁书 -->
+  <header class="core">
+    <div class="book-wrapper">
+      <img src="logo.png" class="book" alt="魔法禁书" />
+      <div class="aura"></div>
     </div>
-  </div>
 
-<script src="main.js"></script>
+    <h1>魔法禁书目录</h1>
+    <p class="subtitle">
+      The Forbidden Index of AI<br>
+      <span>封印状态：已解除</span>
+    </p>
+  </header>
+
+  <!-- 禁术区域 -->
+  <main class="grimoire">
+    <section class="section-title">⚠ S 级禁术 · 高危</section>
+    <div class="cards" id="cards"></div>
+  </main>
+
+  <script src="main.js?v=final"></script>
 </body>
 </html>
