@@ -18,13 +18,13 @@
     }
     #bg { position: fixed; inset: 0; z-index: 0; opacity: 0.6; }
 
-    /* --- 核心优化：完整卡牌 Logo --- */
-    .header-core { position: relative; z-index: 2; text-align: center; padding: 40px 20px 20px; }
+    /* --- 核心：完整卡牌 Logo --- */
+    .header-core { position: relative; z-index: 2; text-align: center; padding: 40px 20px 10px; }
     
     .card-container {
       position: relative;
-      width: 140px; /* 卡牌宽度 */
-      height: 230px; /* 适配库洛牌比例，展示完整长图 */
+      width: 140px; 
+      height: 230px; 
       margin: 0 auto;
       perspective: 1000px;
     }
@@ -33,7 +33,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      border: 3px solid #e0b3ff; /* 神秘紫边框 */
+      border: 3px solid #e0b3ff;
       border-radius: 6px;
       overflow: hidden;
       box-shadow: 0 0 40px rgba(179, 255, 255, 0.4), inset 0 0 15px rgba(0,0,0,0.8);
@@ -45,12 +45,11 @@
     .logo-img {
       width: 100%;
       height: 100%;
-      object-fit: fill; /* 关键：强制完整填充，展示全图 */
+      object-fit: fill;
       display: block;
       filter: contrast(1.1) brightness(1.1);
     }
 
-    /* 魔法阵底座 */
     .magic-base {
       position: absolute; width: 300px; height: 300px;
       border: 1px solid rgba(179, 255, 255, 0.15); border-radius: 50%;
@@ -58,16 +57,47 @@
       animation: rotateRing 30s linear infinite; pointer-events: none;
     }
 
-    /* --- 标题特效 --- */
     h1 {
       margin: 30px 0 5px; font-size: clamp(28px, 8vw, 36px); font-weight: 900; letter-spacing: 10px;
       background: linear-gradient(90deg, #fff, var(--wind-cyan), #e0b3ff, #fff);
       background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: shine 6s linear infinite;
     }
-    .protocol { font-size: 10px; letter-spacing: 4px; color: var(--a-gold); opacity: 0.7; font-weight: bold; }
+    .protocol { font-size: 10px; letter-spacing: 4px; color: var(--a-gold); opacity: 0.7; font-weight: bold; margin-bottom: 20px;}
 
-    /* --- 术式列表 --- */
+    /* --- 赛博警告协议 (温馨提示) --- */
+    .warning-protocol {
+      position: relative; z-index: 3;
+      max-width: 800px;
+      margin: 10px auto 30px;
+      padding: 0 20px;
+      animation: alertPulse 4s infinite;
+    }
+    .warning-box {
+      background: rgba(255, 60, 60, 0.03);
+      border: 1px dashed rgba(255, 60, 60, 0.4);
+      border-radius: 8px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .warning-icon { font-size: 18px; color: var(--s-red); filter: drop-shadow(0 0 5px var(--s-red)); }
+    .warning-text { font-size: 11px; letter-spacing: 1px; line-height: 1.6; color: #bbb; }
+    .warning-text b { color: var(--s-red); }
+    .group-tag {
+      display: inline-block;
+      background: var(--s-red);
+      color: #fff;
+      padding: 0 6px;
+      border-radius: 2px;
+      font-weight: 900;
+      margin: 0 4px;
+      box-shadow: 0 0 10px rgba(255, 60, 60, 0.3);
+    }
+
+    /* --- 列表区域 --- */
     .grimoire { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 20px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 
@@ -94,6 +124,7 @@
     @keyframes cardAction { 0%, 100% { transform: translateY(0) rotateY(0deg); } 50% { transform: translateY(-15px) rotateY(10deg); } }
     @keyframes rotateRing { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
     @keyframes shine { to { background-position: 200% center; } }
+    @keyframes alertPulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
   </style>
 </head>
 <body>
@@ -110,11 +141,21 @@
     <div class="protocol">VOID_PROTOCOL // 30_ITEMS_DECODED</div>
   </header>
 
+  <div class="warning-protocol">
+    <div class="warning-box">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        <b>ACCESS_WARNING:</b> 检测到部分高阶术式处于跨域封锁状态，需开启<b>“跨维度链接”</b>方可唤醒。若术式溃散，请速回阵地同步：<span class="group-tag">QQ群 691105381</span>
+      </div>
+    </div>
+  </div>
+
   <main class="grimoire">
     <div class="grid" id="grid"></div>
   </main>
 
   <script>
+    // 资源数据保持不变
     const data = [
       {"t":"TEXT-TO-IMAGE","l":"S","u":"https://deepai.org/machine-learning-model/text2img","d":"解析纯文本意志，强行重构视觉位面。"},
       {"t":"PLAYGROUND AI","l":"S","u":"https://playgroundai.com/","d":"高维创作空间，支持多重咒语并行解析。"},
@@ -160,6 +201,7 @@
 
     setTimeout(() => { document.querySelectorAll('.card').forEach(c => c.classList.add('show')); }, 100);
 
+    // 背景粒子逻辑
     const c = document.getElementById("bg"), ctx = c.getContext("2d");
     let w, h;
     function resize() { w = c.width = window.innerWidth; h = c.height = window.innerHeight; }
