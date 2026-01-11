@@ -1,4 +1,4 @@
-const API_URL = "https://api.siliconflow.cn/v1/chat/completions";
+const API_URL = "https://qwen3.slmnb.cn/api/chat";
 
 const chatEl = document.getElementById("chat");
 const inputEl = document.getElementById("input");
@@ -26,7 +26,7 @@ sendBtn.onclick = async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "Qwen/Qwen2.5-7B-Instruct",
+      model: "Qwen3-30B-A3B",
       messages
     })
   });
