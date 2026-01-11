@@ -1,4 +1,5 @@
-const API_URL = "https://你的workers子域名.workers.dev"; // 之后会教你配置
+const API_URL = "https://api.siliconflow.cn/v1/chat/completions";
+
 const chatEl = document.getElementById("chat");
 const inputEl = document.getElementById("input");
 const sendBtn = document.getElementById("send");
@@ -25,7 +26,7 @@ sendBtn.onclick = async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "qwen2.5-7b-instruct",
+      model: "Qwen/Qwen2.5-7B-Instruct",
       messages
     })
   });
