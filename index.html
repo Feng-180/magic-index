@@ -3,163 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>资源风 AI 导航 | 全球顶级模型收录</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
     
-    <meta name="description" content="资源风 AI 导航站收录了全球最顶级的 AI 工具，包括 ChatGPT, DeepSeek, Midjourney, Suno, Sora 等，提供国内直连和免费 AI 资源推荐。">
-    <meta name="keywords" content="AI导航, ChatGPT, DeepSeek, 免费AI, AI工具箱, 资源风, Suno, Midjourney">
+    <title>资源风 AI 导航 | 智能数据版</title>
+    <meta name="description" content="收录全球顶级 AI 工具，提供 ChatGPT, DeepSeek, Midjourney 等国内直连与免费资源。">
 
     <style>
-        /* --- 全局样式 --- */
+        /* --- 样式保持不变，优化了细节 --- */
         :root {
-            --bg: #0f1115;       /* 深空黑 */
-            --card-bg: rgba(24, 27, 33, 0.7); /* 半透明卡片 */
+            --bg: #0f1115;
+            --card-bg: rgba(24, 27, 33, 0.7);
             --text-main: #ffffff;
             --text-sub: #9ca3af;
-            --accent: #3b82f6;   /* 科技蓝 */
-            --accent-hover: #2563eb;
+            --accent: #3b82f6;
             --border: rgba(255, 255, 255, 0.1);
         }
-
-        body {
-            margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
+        body { margin: 0; padding: 0; font-family: sans-serif; background: var(--bg); color: var(--text-main); overflow-x: hidden; min-height: 100vh; }
         a { text-decoration: none; color: inherit; }
+        #starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
         
-        /* --- 动态星空画布 --- */
-        #starfield {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
+        .header { background: rgba(15, 17, 21, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 20px 0; position: sticky; top: 0; z-index: 100; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* --- 头部区域 --- */
-        .header {
-            background: rgba(15, 17, 21, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-        }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .logo { font-size: 24px; font-weight: 800; background: linear-gradient(90deg, #fff, #3b82f6); -webkit-background-clip: text; color: transparent; display: flex; align-items: center; gap: 8px; }
         
-        .container {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
-        }
-
-        .nav-top {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
-        }
-        
-        .logo {
-            font-size: 24px; font-weight: 800;
-            background: linear-gradient(90deg, #fff, #3b82f6);
-            -webkit-background-clip: text; color: transparent;
-            display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px;
-        }
-
-        /* 提交按钮 */
-        .submit-btn {
-            font-size: 13px; color: var(--text-sub); border: 1px solid var(--border);
-            padding: 6px 14px; border-radius: 20px; transition: all 0.3s;
-            background: rgba(255,255,255,0.05); display: flex; align-items: center; gap: 5px;
-        }
+        .submit-btn { font-size: 13px; color: var(--text-sub); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; transition: 0.3s; background: rgba(255,255,255,0.05); }
         .submit-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
 
-        /* 搜索框 */
         .search-wrapper { position: relative; max-width: 500px; margin: 0 auto; }
-        .search-input {
-            width: 100%; padding: 14px 24px; padding-left: 50px;
-            background: rgba(0,0,0,0.4); border: 1px solid var(--border);
-            border-radius: 50px; color: #fff; font-size: 16px; outline: none;
-            transition: all 0.3s; box-sizing: border-box;
-        }
-        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); background: rgba(0,0,0,0.8); }
-        .search-icon {
-            position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
-            color: #666; width: 20px; height: 20px;
-        }
+        .search-input { width: 100%; padding: 14px 24px 14px 50px; background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 50px; color: #fff; font-size: 16px; outline: none; transition: 0.3s; box-sizing: border-box; }
+        .search-input:focus { border-color: var(--accent); background: rgba(0,0,0,0.8); }
+        .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #666; width: 20px; }
 
-        /* --- 分类标签 --- */
-        .categories {
-            display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
-        }
-        .cat-btn {
-            background: rgba(255,255,255,0.05); border: 1px solid transparent;
-            color: var(--text-sub); padding: 8px 18px; border-radius: 20px;
-            cursor: pointer; font-size: 14px; transition: all 0.2s; font-weight: 500;
-        }
-        .cat-btn:hover, .cat-btn.active {
-            background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-        }
+        .categories { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .cat-btn { background: rgba(255,255,255,0.05); color: var(--text-sub); padding: 8px 18px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: 0.2s; border: 1px solid transparent; }
+        .cat-btn.active, .cat-btn:hover { background: var(--accent); color: white; }
 
-        /* --- 内容网格 --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-            padding: 40px 0;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; padding: 40px 0; }
 
-        /* 卡片样式 */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; gap: 14px;
-            position: relative; overflow: hidden;
-            backdrop-filter: blur(5px);
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            border-color: var(--accent);
-            background: rgba(30, 35, 45, 0.9);
-        }
-
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; transition: 0.3s; display: flex; flex-direction: column; gap: 14px; position: relative; backdrop-filter: blur(5px); }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent); background: rgba(30, 35, 45, 0.9); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        
         .card-header { display: flex; align-items: center; gap: 16px; }
-        .card-icon {
-            width: 52px; height: 52px; border-radius: 12px;
-            background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;
-            font-size: 28px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.05);
-        }
+        .card-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.05); }
         .card-info h3 { margin: 0; font-size: 18px; color: #fff; font-weight: 600; }
         .card-info p { margin: 4px 0 0; font-size: 12px; color: #666; }
-
-        .card-desc {
-            font-size: 14px; color: var(--text-sub); line-height: 1.6;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-            height: 44px;
-        }
-
+        
+        .card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.6; height: 44px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        
         .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
-        .tag {
-            font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 500;
-        }
-        .tag.vpn { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }   /* 需翻墙 */
-        .tag.cn { background: rgba(34, 197, 94, 0.15); color: #86efac; }    /* 国内直连 */
-        .tag.free { background: rgba(59, 130, 246, 0.15); color: #93c5fd; } /* 免费 */
-        .tag.pro { background: rgba(255, 255, 255, 0.1); color: #aaa; }     /* 普通 */
+        .tag { font-size: 11px; padding: 4px 10px; border-radius: 6px; font-weight: 500; }
+        /* 标签颜色配置 */
+        .tag[data-type="vpn"] { background: rgba(239, 68, 68, 0.15); color: #fca5a5; }
+        .tag[data-type="cn"] { background: rgba(34, 197, 94, 0.15); color: #86efac; }
+        .tag[data-type="free"] { background: rgba(59, 130, 246, 0.15); color: #93c5fd; }
+        .tag[data-type="pro"] { background: rgba(255, 255, 255, 0.1); color: #aaa; }
 
-        .visit-btn {
-            margin-top: 15px; display: block; text-align: center;
-            background: rgba(255,255,255,0.08); color: white; padding: 12px;
-            border-radius: 10px; font-weight: 600; font-size: 14px;
-            transition: all 0.2s;
-        }
-        .card:hover .visit-btn { background: var(--accent); transform: scale(1.02); }
-
-        /* 底部 */
-        footer {
-            text-align: center; padding: 60px 20px; color: #555; font-size: 13px;
-            border-top: 1px solid var(--border); background: rgba(0,0,0,0.2);
-        }
+        .visit-btn { margin-top: 15px; display: block; text-align: center; background: rgba(255,255,255,0.08); color: white; padding: 12px; border-radius: 10px; font-weight: 600; font-size: 14px; transition: 0.2s; }
+        .card:hover .visit-btn { background: var(--accent); }
+        
+        footer { text-align: center; padding: 60px 20px; color: #555; font-size: 13px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
@@ -169,346 +73,282 @@
     <header class="header">
         <div class="container">
             <div class="nav-top">
-                <div class="logo">🚀 资源风 AI <span style="font-size:12px; opacity:0.6; font-weight:normal; margin-top:4px;">NAV STATION</span></div>
-                
-                <a href="mailto:yourname@email.com?subject=提交AI网站收录" class="submit-btn">
-                    <span>➕</span> 提交收录
-                </a>
+                <div class="logo">🚀 资源风 AI <span style="font-size:12px; opacity:0.6; font-weight:normal; margin-top:4px; margin-left:5px;">DATA VER</span></div>
+                <a href="mailto:your@email.com" class="submit-btn">➕ 提交收录</a>
             </div>
             
             <div class="search-wrapper">
                 <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <input type="text" class="search-input" placeholder="搜索全球顶级模型 (如: Suno, DeepSeek)..." onkeyup="filterCards()">
+                <input type="text" class="search-input" placeholder="搜索全球顶级模型..." onkeyup="renderCards(this.value)">
             </div>
 
-            <div class="categories" id="categories">
-                <div class="cat-btn active" onclick="filterCat('all')">全部</div>
-                <div class="cat-btn" onclick="filterCat('chat')">💬 对话聊天</div>
-                <div class="cat-btn" onclick="filterCat('image')">🎨 绘画设计</div>
-                <div class="cat-btn" onclick="filterCat('code')">💻 编程代码</div>
-                <div class="cat-btn" onclick="filterCat('video')">🎬 影音生成</div>
+            <div class="categories">
+                <div class="cat-btn active" onclick="filterCat('all', this)">全部</div>
+                <div class="cat-btn" onclick="filterCat('chat', this)">💬 对话聊天</div>
+                <div class="cat-btn" onclick="filterCat('image', this)">🎨 绘画设计</div>
+                <div class="cat-btn" onclick="filterCat('code', this)">💻 编程代码</div>
+                <div class="cat-btn" onclick="filterCat('video', this)">🎬 影音生成</div>
+                <div class="cat-btn" onclick="filterCat('search', this)">🔍 搜索工具</div>
             </div>
         </div>
     </header>
 
     <main class="container">
-        <div class="grid" id="grid">
-            
-            <a href="https://chat.deepseek.com/" target="_blank" class="card" data-cat="chat code">
-                <div class="card-header">
-                    <div class="card-icon">🦈</div>
-                    <div class="card-info">
-                        <h3>DeepSeek</h3>
-                        <p>深度求索</p>
-                    </div>
-                </div>
-                <div class="card-desc">国产之光，中文能力和代码能力极强的免费大模型，媲美 GPT-4。</div>
-                <div class="tags">
-                    <span class="tag cn">国内直连</span>
-                    <span class="tag free">完全免费</span>
-                    <span class="tag pro">六边形战士</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://chatgpt.com/" target="_blank" class="card" data-cat="chat image code">
-                <div class="card-header">
-                    <div class="card-icon">🤖</div>
-                    <div class="card-info">
-                        <h3>ChatGPT</h3>
-                        <p>OpenAI</p>
-                    </div>
-                </div>
-                <div class="card-desc">全球知名度最高的 AI，综合能力最强，支持绘图、联网、数据分析。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag pro">行业标杆</span>
-                    <span class="tag pro">GPT-4o</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://www.perplexity.ai/" target="_blank" class="card" data-cat="chat">
-                <div class="card-header">
-                    <div class="card-icon">🔍</div>
-                    <div class="card-info">
-                        <h3>Perplexity</h3>
-                        <p>AI 搜索</p>
-                    </div>
-                </div>
-                <div class="card-desc">替代传统搜索引擎的神器，直接给出精准答案和来源引用。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag free">免费可用</span>
-                    <span class="tag pro">学术搜索</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://x.com/i/grok" target="_blank" class="card" data-cat="chat">
-                <div class="card-header">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-info">
-                        <h3>Grok</h3>
-                        <p>xAI (马斯克)</p>
-                    </div>
-                </div>
-                <div class="card-desc">实时连接 X (Twitter) 数据，风格幽默、叛逆，无拘无束。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag pro">推特内置</span>
-                    <span class="tag pro">实时新闻</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://claude.ai/" target="_blank" class="card" data-cat="chat code">
-                <div class="card-header">
-                    <div class="card-icon">🧠</div>
-                    <div class="card-info">
-                        <h3>Claude 3.5</h3>
-                        <p>Anthropic</p>
-                    </div>
-                </div>
-                <div class="card-desc">写代码和长文写作的神器，逻辑性极强，拟人度最高。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag pro">编程最强</span>
-                    <span class="tag pro">写作专家</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://kimi.moonshot.cn/" target="_blank" class="card" data-cat="chat">
-                <div class="card-header">
-                    <div class="card-icon">🌙</div>
-                    <div class="card-info">
-                        <h3>Kimi 助手</h3>
-                        <p>月之暗面</p>
-                    </div>
-                </div>
-                <div class="card-desc">国产长文本处理专家，支持读取超长 PDF 文件和网页总结。</div>
-                <div class="tags">
-                    <span class="tag cn">国内直连</span>
-                    <span class="tag free">免费</span>
-                    <span class="tag pro">读论文神器</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://suno.com/" target="_blank" class="card" data-cat="video">
-                <div class="card-header">
-                    <div class="card-icon">🎵</div>
-                    <div class="card-info">
-                        <h3>Suno</h3>
-                        <p>AI 音乐</p>
-                    </div>
-                </div>
-                <div class="card-desc">输入歌词或风格，一键生成 3 分钟广播级歌曲，震撼人心。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag free">每日免费</span>
-                    <span class="tag pro">音乐生成</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://www.midjourney.com/" target="_blank" class="card" data-cat="image">
-                <div class="card-header">
-                    <div class="card-icon">🎨</div>
-                    <div class="card-info">
-                        <h3>Midjourney</h3>
-                        <p>AI 绘图</p>
-                    </div>
-                </div>
-                <div class="card-desc">目前地表最强的 AI 绘图工具，艺术感和光影效果无敌。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag pro">付费</span>
-                    <span class="tag pro">画质最强</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://www.liblib.art/" target="_blank" class="card" data-cat="image">
-                <div class="card-header">
-                    <div class="card-icon">🖌️</div>
-                    <div class="card-info">
-                        <h3>Liblib AI</h3>
-                        <p>国产 SD 社区</p>
-                    </div>
-                </div>
-                <div class="card-desc">国内最大的 Stable Diffusion 在线生图平台，海量模型免费用。</div>
-                <div class="tags">
-                    <span class="tag cn">国内直连</span>
-                    <span class="tag free">每日免费</span>
-                    <span class="tag pro">可控性强</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://www.cursor.com/" target="_blank" class="card" data-cat="code">
-                <div class="card-header">
-                    <div class="card-icon">💻</div>
-                    <div class="card-info">
-                        <h3>Cursor</h3>
-                        <p>AI 编辑器</p>
-                    </div>
-                </div>
-                <div class="card-desc">把 VS Code 结合了 Claude 3.5，能全自动写代码的编辑器。</div>
-                <div class="tags">
-                    <span class="tag vpn">推荐翻墙</span>
-                    <span class="tag pro">程序员必备</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-             <a href="https://klingai.kuaishou.com/" target="_blank" class="card" data-cat="video">
-                <div class="card-header">
-                    <div class="card-icon">🎬</div>
-                    <div class="card-info">
-                        <h3>可灵 AI</h3>
-                        <p>快手出品</p>
-                    </div>
-                </div>
-                <div class="card-desc">国产视频生成最强模型，效果逼近 Sora，支持长视频生成。</div>
-                <div class="tags">
-                    <span class="tag cn">国内直连</span>
-                    <span class="tag pro">视频生成</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://huggingface.co/" target="_blank" class="card" data-cat="code">
-                <div class="card-header">
-                    <div class="card-icon">🤗</div>
-                    <div class="card-info">
-                        <h3>Hugging Face</h3>
-                        <p>AI 社区</p>
-                    </div>
-                </div>
-                <div class="card-desc">AI 界的 GitHub，全球最大的开源模型和数据集托管平台。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag free">开源</span>
-                    <span class="tag pro">开发者</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-            <a href="https://gemini.google.com/" target="_blank" class="card" data-cat="chat image code">
-                <div class="card-header">
-                    <div class="card-icon">💎</div>
-                    <div class="card-info">
-                        <h3>Gemini</h3>
-                        <p>Google</p>
-                    </div>
-                </div>
-                <div class="card-desc">谷歌最强模型，完美集成全家桶，多模态识别能力极强。</div>
-                <div class="tags">
-                    <span class="tag vpn">需翻墙</span>
-                    <span class="tag free">免费</span>
-                    <span class="tag pro">反应快</span>
-                </div>
-                <div class="visit-btn">立即访问</div>
-            </a>
-
-        </div>
+        <div class="grid" id="grid"></div>
     </main>
 
-    <footer>
-        © 2025 资源风 AI 导航站 | 收录全球顶尖 AI 生产力工具
-    </footer>
+    <footer>© 2025 资源风 AI 导航站 | Intelligent Navigation</footer>
 
-    <script>
-        // --- 1. 动态星空逻辑 ---
-        const canvas = document.getElementById('starfield');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let stars = [];
+<script>
+    // 🔥🔥🔥 核心数据区：以后想加网站，就在这里加一行！ 🔥🔥🔥
+    const toolsData = [
+        {
+            name: "DeepSeek",
+            sub: "深度求索",
+            desc: "国产之光，中文能力和代码能力极强的免费大模型，媲美 GPT-4。",
+            url: "https://chat.deepseek.com/",
+            icon: "🦈",
+            cat: ["chat", "code"], // 分类
+            tags: [
+                { text: "国内直连", type: "cn" },
+                { text: "完全免费", type: "free" },
+                { text: "六边形战士", type: "pro" }
+            ]
+        },
+        {
+            name: "ChatGPT",
+            sub: "OpenAI",
+            desc: "全球知名度最高的 AI，综合能力最强，支持绘图、联网、数据分析。",
+            url: "https://chatgpt.com/",
+            icon: "🤖",
+            cat: ["chat", "image", "code"],
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "行业标杆", type: "pro" },
+                { text: "GPT-4o", type: "pro" }
+            ]
+        },
+        {
+            name: "Perplexity",
+            sub: "AI 搜索",
+            desc: "替代传统搜索引擎的神器，直接给出精准答案和来源引用。",
+            url: "https://www.perplexity.ai/",
+            icon: "🔍",
+            cat: ["chat", "search"],
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "免费可用", type: "free" },
+                { text: "学术搜索", type: "pro" }
+            ]
+        },
+        {
+            name: "Grok",
+            sub: "xAI",
+            desc: "马斯克出品，实时连接 X (Twitter) 数据，风格幽默、叛逆。",
+            url: "https://x.com/i/grok",
+            icon: "⚡",
+            cat: ["chat"],
+            tags: [
+                { text: "推特内置", type: "vpn" },
+                { text: "实时新闻", type: "pro" }
+            ]
+        },
+        {
+            name: "Claude 3.5",
+            sub: "Anthropic",
+            desc: "写代码和长文写作的神器，逻辑性极强，拟人度最高。",
+            url: "https://claude.ai/",
+            icon: "🧠",
+            cat: ["chat", "code"],
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "编程最强", type: "pro" }
+            ]
+        },
+        {
+            name: "Suno",
+            sub: "AI 音乐",
+            desc: "输入歌词或风格，一键生成 3 分钟广播级歌曲，震撼人心。",
+            url: "https://suno.com/",
+            icon: "🎵",
+            cat: ["video"], // 归类为影音
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "每日免费", type: "free" }
+            ]
+        },
+        {
+            name: "Midjourney",
+            sub: "AI 绘图",
+            desc: "目前地表最强的 AI 绘图工具，艺术感和光影效果无敌。",
+            url: "https://www.midjourney.com/",
+            icon: "🎨",
+            cat: ["image"],
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "付费", type: "pro" }
+            ]
+        },
+        {
+            name: "Kimi 助手",
+            sub: "月之暗面",
+            desc: "国产长文本处理专家，支持读取超长 PDF 文件和网页总结。",
+            url: "https://kimi.moonshot.cn/",
+            icon: "🌙",
+            cat: ["chat", "search"],
+            tags: [
+                { text: "国内直连", type: "cn" },
+                { text: "读论文神器", type: "free" }
+            ]
+        },
+        {
+            name: "Liblib AI",
+            sub: "哩布哩布",
+            desc: "国内最大的 Stable Diffusion 在线生图平台，海量模型免费用。",
+            url: "https://www.liblib.art/",
+            icon: "🖌️",
+            cat: ["image"],
+            tags: [
+                { text: "国内直连", type: "cn" },
+                { text: "每日免费", type: "free" }
+            ]
+        },
+        {
+            name: "Cursor",
+            sub: "AI 编辑器",
+            desc: "把 VS Code 结合了 Claude 3.5，能全自动写代码的编辑器。",
+            url: "https://www.cursor.com/",
+            icon: "💻",
+            cat: ["code"],
+            tags: [
+                { text: "推荐翻墙", type: "vpn" },
+                { text: "程序员必备", type: "pro" }
+            ]
+        },
+        {
+            name: "可灵 AI",
+            sub: "快手",
+            desc: "国产视频生成最强模型，效果逼近 Sora，支持长视频生成。",
+            url: "https://klingai.kuaishou.com/",
+            icon: "🎬",
+            cat: ["video"],
+            tags: [
+                { text: "国内直连", type: "cn" },
+                { text: "视频生成", type: "pro" }
+            ]
+        },
+        {
+            name: "Hugging Face",
+            sub: "抱抱脸",
+            desc: "AI 界的 GitHub，全球最大的开源模型和数据集托管平台。",
+            url: "https://huggingface.co/",
+            icon: "🤗",
+            cat: ["code"],
+            tags: [
+                { text: "需翻墙", type: "vpn" },
+                { text: "开源社区", type: "free" }
+            ]
+        }
+    ];
 
-        function initStars() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            stars = [];
-            // 创建120颗星星
-            for(let i=0; i<120; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 0.4 + 0.1,
-                    opacity: Math.random()
+    // --- 逻辑代码 (不需要动) ---
+
+    let currentCat = 'all';
+
+    function renderCards(searchText = '') {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = ''; // 清空当前
+
+        const lowerSearch = searchText.toLowerCase();
+
+        toolsData.forEach(tool => {
+            // 筛选逻辑
+            const matchCat = currentCat === 'all' || tool.cat.includes(currentCat);
+            const matchSearch = tool.name.toLowerCase().includes(lowerSearch) || 
+                              tool.desc.toLowerCase().includes(lowerSearch) ||
+                              tool.sub.toLowerCase().includes(lowerSearch);
+
+            if (matchCat && matchSearch) {
+                // 生成 HTML
+                const card = document.createElement('a');
+                card.href = tool.url;
+                card.target = "_blank";
+                card.className = "card";
+                
+                // 生成标签 HTML
+                let tagsHtml = '';
+                tool.tags.forEach(tag => {
+                    tagsHtml += `<span class="tag" data-type="${tag.type}">${tag.text}</span>`;
                 });
+
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="card-icon">${tool.icon}</div>
+                        <div class="card-info">
+                            <h3>${tool.name}</h3>
+                            <p>${tool.sub}</p>
+                        </div>
+                    </div>
+                    <div class="card-desc">${tool.desc}</div>
+                    <div class="tags">${tagsHtml}</div>
+                    <div class="visit-btn">立即访问</div>
+                `;
+                grid.appendChild(card);
             }
-        }
+        });
+    }
 
-        function animateStars() {
-            ctx.clearRect(0, 0, width, height);
-            
-            stars.forEach(star => {
-                ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
-                // 向上移动
-                star.y -= star.speed;
-                // 循环
-                if(star.y < 0) {
-                    star.y = height;
-                    star.x = Math.random() * width;
-                }
-            });
-            requestAnimationFrame(animateStars);
-        }
+    function filterCat(cat, btnElement) {
+        currentCat = cat;
+        // 按钮样式切换
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+        // 重新渲染
+        renderCards(document.querySelector('.search-input').value);
+    }
 
-        window.addEventListener('resize', initStars);
-        initStars();
-        animateStars();
+    // 初始化
+    renderCards();
 
-        // --- 2. 筛选逻辑 ---
-        function filterCat(category) {
-            // 按钮高亮
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('active');
-                // 简单的匹配逻辑
-                const btnText = btn.innerText;
-                if(category === 'all' && btnText === '全部') btn.classList.add('active');
-                if(category === 'chat' && btnText.includes('对话')) btn.classList.add('active');
-                if(category === 'image' && btnText.includes('绘画')) btn.classList.add('active');
-                if(category === 'code' && btnText.includes('编程')) btn.classList.add('active');
-                if(category === 'video' && btnText.includes('影音')) btn.classList.add('active');
-            });
+    // --- 星空特效 ---
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let stars = [];
 
-            // 卡片显示隐藏
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const cats = card.dataset.cat;
-                if (category === 'all' || cats.includes(category)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+    function initStars() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        stars = [];
+        for(let i=0; i<100; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.4 + 0.1,
+                opacity: Math.random()
             });
         }
+    }
 
-        // --- 3. 搜索逻辑 ---
-        function filterCards() {
-            const input = document.querySelector('.search-input').value.toLowerCase();
-            const cards = document.querySelectorAll('.card');
-            
-            cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                if (text.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
+    function animateStars() {
+        ctx.clearRect(0, 0, width, height);
+        stars.forEach(star => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+            star.y -= star.speed;
+            if(star.y < 0) { star.y = height; star.x = Math.random() * width; }
+        });
+        requestAnimationFrame(animateStars);
+    }
+    window.addEventListener('resize', initStars);
+    initStars();
+    animateStars();
+</script>
 
 </body>
 </html>
