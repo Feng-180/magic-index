@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>青锋教育宣传单页 - A4打印版</title>
+    <style>
+        /* --- 打印设置核心 --- */
+        @page {
+            size: A4;
+            margin: 0; /* 去掉浏览器默认边距 */
+        }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        /* --- 全局样式 --- */
+        * { box-sizing: border-box; font-family: "Microsoft YaHei", "Heiti SC", sans-serif; }
+        body { margin: 0; padding: 0; background: #f0f0f0; }
+        
+        /* A4 页面容器 */
+        .sheet {
+            width: 210mm;
+            height: 296mm; /* 稍微留一点容错空间 */
+            position: relative;
+            overflow: hidden;
+            background: white;
+            page-break-after: always; /* 打印完一张自动换页 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 正面样式 (丛林迷彩风) --- */
+        .front-page {
+            /* 模拟深色迷彩背景：深绿+黑+褐 */
+            background: linear-gradient(135deg, #1a3c1a 25%, #2f4f2f 25%, #2f4f2f 50%, #1a3c1a 50%, #1a3c1a 75%, #2f4f2f 75%, #2f4f2f 100%);
+            background-size: 40px 40px;
+            color: #fff;
+            position: relative;
+        }
+        /* 加一个遮罩让背景不那么花 */
+        .front-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 30, 10, 0.85); /* 深绿色半透明遮罩 */
+            z-index: 0;
+        }
+        .content { z-index: 1; position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
+
+        /* 正面 - 顶部 */
+        .f-header { padding: 30px; text-align: center; border-bottom: 2px solid #ffd700; }
+        .logo { font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+        .slogan-top { color: #ffd700; font-size: 14px; margin-top: 5px; }
+
+        /* 正面 - 核心Slogan */
+        .f-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .big-text {
+            font-size: 42px; font-weight: 900; line-height: 1.4;
+            background: linear-gradient(to bottom, #ffd700, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+        }
+        .sub-text { font-size: 18px; color: #ddd; letter-spacing: 3px; border: 1px solid #ffd700; padding: 5px 20px; border-radius: 20px; }
+
+        /* 正面 - 图片占位区 */
+        .f-img-box {
+            width: 80%; height: 250px; background: #333; margin: 20px auto;
+            border: 4px solid #ffd700; display: flex; align-items: center; justify-content: center;
+            color: #777; font-size: 14px; position: relative;
+        }
+        .f-img-box::after { content: "此处插入教官敬礼/正步照片"; color: #aaa; }
+
+        /* 正面 - 课程勋章 */
+        .f-badges { display: flex; justify-content: space-around; padding: 20px 40px; }
+        .badge { text-align: center; }
+        .badge-circle {
+            width: 60px; height: 60px; border: 2px solid #ffd700; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;
+            font-size: 24px; color: #ffd700;
+        }
+        .badge p { font-size: 14px; font-weight: bold; margin: 0; }
+
+        /* 正面 - 底部 */
+        .f-footer { background: #000; padding: 15px; text-align: center; font-size: 14px; color: #ffd700; }
+
+        /* --- 背面样式 (荒漠迷彩风) --- */
+        .back-page {
+            /* 模拟荒漠迷彩：沙色+淡褐 */
+            background-color: #f4e4bc;
+            background-image: radial-gradient(#d2b48c 15%, transparent 16%), radial-gradient(#d2b48c 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: #3e2723; /* 深褐色文字 */
+        }
+        .back-content { padding: 30px; display: flex; flex-direction: column; height: 100%; }
+
+        /* 背面 - 跑酷主推 */
+        .b-main {
+            background: rgba(255,255,255,0.8); border: 2px solid #5d4037;
+            padding: 20px; margin-bottom: 20px; display: flex; gap: 20px;
+            box-shadow: 5px 5px 0px rgba(93, 64, 55, 0.2);
+        }
+        .b-main-img {
+            flex: 1; background: #ccc; height: 200px; display: flex; align-items: center; justify-content: center;
+            border: 1px dashed #5d4037;
+        }
+        .b-main-text { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .tag { background: #d32f2f; color: white; padding: 2px 8px; font-size: 12px; display: inline-block; width: fit-content; margin-bottom: 10px;}
+        .b-title { font-size: 28px; font-weight: 900; color: #3e2723; margin: 0 0 10px 0; }
+        .b-desc { font-size: 14px; line-height: 1.6; color: #5d4037; }
+
+        /* 背面 - 三大项目 */
+        .b-grid { display: flex; gap: 15px; margin-bottom: 20px; }
+        .b-card {
+            flex: 1; background: #fff; padding: 15px; text-align: center;
+            border: 1px solid #d2b48c; border-radius: 8px;
+        }
+        .b-card h3 { margin: 10px 0 5px; color: #d84315; }
+        .b-card p { font-size: 12px; margin: 0; color: #666; }
+        .icon-box { font-size: 30px; }
+
+        /* 背面 - 研学照片墙 */
+        .b-photos {
+            background: #5d4037; color: white; padding: 15px; margin-bottom: 20px; flex: 1;
+        }
+        .b-photos h3 { margin: 0 0 15px 0; font-size: 18px; border-left: 4px solid #fff; padding-left: 10px; }
+        .photo-row { display: flex; gap: 10px; height: 120px; }
+        .photo-slot { flex: 1; background: #8d6e63; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid white; }
+
+        /* 背面 - CTA */
+        .b-cta {
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            background: white; padding: 15px; border: 2px dashed #d32f2f;
+        }
+        .qr-placeholder { width: 80px; height: 80px; background: #000; }
+        .cta-text h2 { margin: 0; color: #d32f2f; font-size: 22px; }
+        .cta-text p { margin: 5px 0 0; font-size: 14px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sheet front-page">
+        <div class="front-overlay"></div>
+        <div class="content">
+            <div class="f-header">
+                <div class="logo">青锋教育 QINGFENG</div>
+                <div class="slogan-top">退役军人执教 · 铸就铁血军魂</div>
+            </div>
+
+            <div class="f-hero">
+                <div class="big-text">
+                    文能提笔安天下<br>
+                    武能上马定乾坤
+                </div>
+                <div class="sub-text">太原退役军人少儿特训基地</div>
+                
+                <div class="f-img-box">
+                    <span>【建议放入：教官正步或敬礼特写照片】</span>
+                </div>
+            </div>
+
+            <div class="f-badges">
+                <div class="badge">
+                    <div class="badge-circle">🔫</div>
+                    <p>战术射击</p>
+                </div>
+                <div class="badge">
+                    <div class="badge-circle">🛡️</div>
+                    <p>防卫格斗</p>
+                </div>
+                <div class="badge">
+                    <div class="badge-circle">⛑️</div>
+                    <p>急救避险</p>
+                </div>
+                <div class="badge">
+                    <div class="badge-circle">👮</div>
+                    <p>作风纪律</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; color: #ddd; font-style: italic; margin-bottom: 20px; font-size: 14px;">
+                “不只是体能的磨练，更是胆识与纪律的洗礼”
+            </div>
+
+            <div class="f-footer">
+                地址：山西太原XX区XX路XX号 &nbsp;|&nbsp; 电话：1XX-XXXX-XXXX
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet back-page">
+        <div class="back-content">
+            
+            <div class="b-main">
+                <div class="b-main-text">
+                    <div class="tag">王牌课程</div>
+                    <h1 class="b-title">军事障碍跑酷</h1>
+                    <div class="b-desc">
+                        ★ 提升爆发力与灵敏度<br>
+                        ★ 克服恐高与胆怯心理<br>
+                        ★ 练就“飞檐走壁”真功夫
+                    </div>
+                </div>
+                <div class="b-main-img">
+                    <span style="color:#666">【建议放入：孩子翻越障碍墙照片】</span>
+                </div>
+            </div>
+
+            <div class="b-grid">
+                <div class="b-card">
+                    <div class="icon-box">🏀</div>
+                    <h3>篮球训练</h3>
+                    <p>团队协作 · 长高利器</p>
+                </div>
+                <div class="b-card">
+                    <div class="icon-box">🥊</div>
+                    <h3>格斗武术</h3>
+                    <p>防身自卫 · 强健体魄</p>
+                </div>
+                <div class="b-card">
+                    <div class="icon-box">🏃</div>
+                    <h3>专业跳绳</h3>
+                    <p>中考达标 · 强化心肺</p>
+                </div>
+            </div>
+
+            <div class="b-photos">
+                <h3>行走的课堂 · 社会化研学</h3>
+                <div class="photo-row">
+                    <div class="photo-slot">军事夏令营</div>
+                    <div class="photo-slot">亲子研学游</div>
+                    <div class="photo-slot">团建/毕业季</div>
+                </div>
+                <p style="margin-top: 10px; font-size: 13px; text-align: right;">读万卷书，更要行万里路 >></p>
+            </div>
+
+            <div class="b-cta">
+                <div class="qr-placeholder" style="color:white; display:flex; align-items:center; justify-content:center; font-size:10px;">二维码</div>
+                <div class="cta-text">
+                    <h2>扫码领取【体验课】</h2>
+                    <p>让孩子成为自己的英雄！<br>预约电话：1XX-XXXX-XXXX</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
